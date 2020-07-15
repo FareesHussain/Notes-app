@@ -9,7 +9,9 @@ import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import farees.hussain.notesapp.R
+import farees.hussain.notesapp.database.NoteDatabase
 import farees.hussain.notesapp.databinding.ActivityMainBinding
+import farees.hussain.notesapp.repository.NoteRepository
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -20,7 +22,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        val noteRepository = NoteRepository(NoteDatabase(this))
+        val viewModelFactory = MainViewModelFactory(noteRepository)
+        viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
 
 
         val navController = Navigation.findNavController(this,R.id.fragment)

@@ -18,5 +18,10 @@
         <action
             android:id="@+id/action_noteFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <argument
+            android:name="updateNote"
+            app:argType="farees.hussain.notesapp.database.Note"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 </navigation>
